@@ -1,0 +1,183 @@
+:root{
+  --bg: #f7f8fb;
+  --card: #fff;
+  --text: #000;            /* نص أسود للوضع الفاتح */
+  --accent: #0b6efd;
+  --muted: #666;
+  --danger: #e55353;
+  --shadow: 0 8px 26px rgba(20,20,50,0.06);
+  --success: #22c55e;
+
+  /* ألوان أيقونات التبويبات (الوضع الفاتح) */
+  --tab-dashboard: #0b84ff;
+  --tab-halqat: #06b6d4;
+  --tab-students: #10b981;
+  --tab-results: #f59e0b;
+  --tab-reports: #ef4444;
+  --tab-charts: #8b5cf6;
+
+  --tab-active-bg: rgba(11,132,255,0.08);
+}
+
+[data-theme="dark"]{
+  --bg: #0f1720;
+  --card: #0b1220;
+  --text: #e6eef8;
+  --accent: #4ea8ff;
+  --muted: #9fb0c8;
+  --shadow: 0 8px 26px rgba(0,0,0,0.6);
+  --success: #22c55e;
+
+  /* ألوان أيقونات التبويبات (الوضع الداكن) - درجات أفتح قليلاً */
+  --tab-dashboard: #7fb8ff;
+  --tab-halqat: #6ed7df;
+  --tab-students: #7fe6b0;
+  --tab-results: #ffc87a;
+  --tab-reports: #ff9b9b;
+  --tab-charts: #bda7ff;
+
+  --tab-active-bg: rgba(125,150,255,0.08);
+}
+
+/* Explicit light theme to ensure text black when user toggles */
+[data-theme="light"]{
+  --bg: #f7f8fb;
+  --card: #fff;
+  --text: #000;
+  --muted: #555;
+  --shadow: 0 8px 26px rgba(20,20,50,0.06);
+  --tab-active-bg: rgba(11,132,255,0.08);
+}
+
+/* Base */
+*{box-sizing:border-box;font-family: 'Cairo', system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);direction:rtl}
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(0,0,0,0.04);background:linear-gradient(90deg,var(--card),transparent);
+}
+.brand{display:flex;align-items:center;gap:12px}
+#logo{width:62px;height:62px;object-fit:contain;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.brand-text h1{margin:0;font-size:20px;font-weight:700}
+.brand-text .tagline{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+.header-actions{display:flex;gap:10px;align-items:center}
+.theme-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text)}
+.theme-icon{width:18px;height:18px}
+.export-box{display:flex;gap:8px;align-items:center}
+.export-box button{padding:8px 10px;border-radius:8px}
+.file-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px dashed rgba(0,0,0,0.08);background:transparent;color:var(--text);cursor:pointer}
+.file-btn input[type="file"]{display:none}
+.file-icon{width:16px;height:16px}
+
+.container{display:flex;height:calc(100vh - 84px)}
+.sidebar{width:220px;border-left:1px solid rgba(0,0,0,0.04);padding:18px;background:transparent}
+.sidebar nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.tab-btn{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;text-align:right;background:transparent;border:1px solid transparent;cursor:pointer;color:var(--text)}
+.tab-btn .icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:6px}
+.tab-btn .icon svg{width:22px;height:22px;display:block}
+.tab-btn .label{font-weight:600}
+.tab-btn:hover{background:var(--tab-active-bg)}
+
+.tab-btn.active{
+  background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(0,0,0,0.01));
+  box-shadow:var(--shadow);
+  border-color:rgba(0,0,0,0.04);
+}
+
+/* set icon colors per tab (uses CSS variables above) */
+.tab-btn[data-tab="dashboard"] .icon{background:linear-gradient(180deg, rgba(11,132,255,0.12), rgba(11,132,255,0.04)); color:var(--tab-dashboard)}
+.tab-btn[data-tab="halqat"] .icon{background:linear-gradient(180deg, rgba(6,182,212,0.12), rgba(6,182,212,0.04)); color:var(--tab-halqat)}
+.tab-btn[data-tab="students"] .icon{background:linear-gradient(180deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04)); color:var(--tab-students)}
+.tab-btn[data-tab="results"] .icon{background:linear-gradient(180deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04)); color:var(--tab-results)}
+.tab-btn[data-tab="reports"] .icon{background:linear-gradient(180deg, rgba(239,68,68,0.12), rgba(239,68,68,0.04)); color:var(--tab-reports)}
+.tab-btn[data-tab="charts"] .icon{background:linear-gradient(180deg, rgba(139,92,246,0.12), rgba(139,92,246,0.04)); color:var(--tab-charts)}
+
+/* content area */
+.content{flex:1;padding:18px;overflow:auto}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+.panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.panel-header h2{margin:0}
+.cards{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.card{background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow);margin-bottom:12px}
+.card h3{margin-top:0}
+table{width:100%;border-collapse:collapse;background:transparent}
+table thead th{background:transparent;text-align:right;padding:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+table tbody td{padding:10px;border-bottom:1px dashed rgba(0,0,0,0.04);text-align:right}
+button{cursor:pointer;background:var(--accent);border:none;color:white;padding:8px 10px;border-radius:8px}
+button.secondary{background:transparent;color:var(--text);border:1px solid rgba(0,0,0,0.06)}
+.top-shortcuts{display:flex;gap:18px;justify-content:space-between;align-items:flex-start}
+.quick-links{background:var(--card);padding:12px;border-radius:8px;min-width:180px}
+.result-forms{display:flex;gap:12px;flex-wrap:wrap}
+.result-forms .card{flex:1;min-width:320px}
+label{display:block;margin-bottom:8px;font-size:13px;color:var(--muted)}
+input[type="text"], input[type="number"], select, textarea{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text)}
+textarea{resize:vertical}
+.card-actions{display:flex;gap:8px;align-items:center}
+.report-preview{background:var(--card);padding:18px;border-radius:10px;margin-top:12px;min-height:200px;overflow:auto}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;min-height:200px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;z-index:30}
+.modal.hidden{display:none}
+.modal-body{background:var(--card);padding:18px;border-radius:10px;min-width:320px;max-width:920px;box-shadow:var(--shadow);position:relative}
+.modal-close{position:absolute;left:8px;top:6px;border:none;background:transparent;font-size:20px;color:var(--muted);cursor:pointer}
+
+/* Dashboard specific */
+.dashboard-top{display:flex;gap:16px;align-items:flex-start}
+.stat-cards{display:flex;gap:12px;flex:1}
+.stat{flex:1;padding:14px;text-align:center}
+.stat h3{margin:0;color:var(--muted);font-weight:600}
+.stat p{font-size:28px;margin:8px 0 0;font-weight:700}
+.dashboard-quick{width:320px}
+.quick-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.export-panel{margin-top:12px;background:rgba(0,0,0,0.02);padding:10px;border-radius:8px}
+.export-panel h4{margin:0 0 6px 0}
+.export-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
+
+/* Halqat mini cards */
+.halqat-mini .cards.mini{display:flex;flex-direction:row;gap:8px;flex-wrap:wrap}
+.halqat-mini .cards.mini .card{width:auto;padding:10px;min-width:160px}
+
+/* Charts card in dashboard */
+.charts-card .charts-grid{grid-template-columns:1fr 1fr;min-height:160px}
+
+/* Report header colors (columns) */
+.report table{width:100%;border-collapse:collapse;margin-top:12px}
+.report table thead th{
+  padding:10px;border:1px solid rgba(0,0,0,0.04);color:var(--text);font-weight:700;
+}
+.report table thead th:nth-child(1){background:var(--tab-dashboard)}
+.report table thead th:nth-child(2){background:var(--tab-halqat)}
+.report table thead th:nth-child(3){background:var(--tab-results)}
+.report table thead th:nth-child(4){background:var(--tab-charts)}
+.report table thead th:nth-child(5){background:var(--tab-students)}
+.report table thead th:nth-child(6){background:var(--tab-reports)}
+.report table thead th:nth-child(7){background:#fef3c7}
+.report table thead th:nth-child(8){background:#dbeafe}
+.report table thead th:nth-child(9){background:#fce7f3}
+.report table thead th:nth-child(10){background:#e6fffa}
+.report table thead th:nth-child(11){background:#fff7ed}
+.report table thead th:nth-child(12){background:#f3e8ff}
+
+/* Small adjustments */
+.group-row{display:flex;gap:10px}
+.group-row > div{flex:1}
+.form-actions{display:flex;gap:8px;align-items:center;margin-top:10px}
+
+/* Print */
+@media print{
+  body{background:white;color:black}
+  .sidebar,.app-header, .header-actions, .goto, button{display:none}
+  .report-preview{box-shadow:none;border:0;margin:0;border-radius:0}
+  @page { size: A4; margin: 20mm; }
+}
+
+/* Small screens */
+@media (max-width:900px){
+  .container{flex-direction:column}
+  .sidebar{width:auto;order:2;border-left:0;border-top:1px solid rgba(0,0,0,0.04)}
+  .charts-grid{grid-template-columns:1fr}
+  .dashboard-top{flex-direction:column}
+  .dashboard-quick{width:auto}
+  .group-row{flex-direction:column}
+}
